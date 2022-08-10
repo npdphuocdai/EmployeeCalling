@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+
 Item {
     Rectangle{
         id: recDetail
@@ -22,14 +23,14 @@ Item {
             }
             Image {
                 id: imgDetail
-                source: "qrc:/image/woman-icon.gif"
+                source: model.src
                 anchors.fill: parent
             }
         }
 
         Text {
             id: txtEmpName
-            text: qsTr("Le Thi Dung")
+            text: model.text
             font.pointSize: parent.height / 40
 
             anchors{
@@ -53,7 +54,7 @@ Item {
 
         Text {
             id: txtEmpPhone
-            text: qsTr("0869054332")
+            text: model.phone
             font.pointSize: parent.height / 40
 
             anchors{
@@ -81,6 +82,40 @@ Item {
                 width: parent.width
                 height: parent.height
             }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: popCall.visible ?  popCall.close() : popCall.open()
+            }
+            Popup {
+                id: popCall
+                anchors.centerIn: Overlay.overlay
+                width: root.width
+                height: root.height
+
+                Calling{
+                    anchors{
+                        bottom: btnCall.top
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                    }
+                }
+
+                Button {
+                    id: btnCall
+                    anchors{
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
+
+                    }
+                    text: "Back"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: popCall.visible ?  popCall.close() : popCall.open()
+                    }
+                }
+            }
         }
         Rectangle{
             id: recChat
@@ -99,6 +134,40 @@ Item {
                 source: "qrc:/image/chat-icon.png"
                 width: parent.width
                 height: parent.height
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: popChat.visible ?  popChat.close() : popChat.open()
+            }
+            Popup {
+                id: popChat
+                anchors.centerIn: Overlay.overlay
+                width: root.width
+                height: root.height
+
+                Chat{
+                    anchors{
+                        bottom: btnChat.top
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                    }
+                }
+
+                Button {
+                    id: btnChat
+                    anchors{
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
+
+                    }
+                    text: "Back"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: popChat.visible ?  popChat.close() : popChat.open()
+                    }
+                }
             }
         }
     }

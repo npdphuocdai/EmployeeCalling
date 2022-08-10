@@ -23,7 +23,7 @@ Item {
 
             Text {
                 id: txtEmpName
-                text: qsTr("Nguyen Phuoc Dai")
+                text: model.text
                 font.pointSize: parent.height / 5
 
                 anchors{

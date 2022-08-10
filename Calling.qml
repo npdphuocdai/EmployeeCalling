@@ -35,7 +35,7 @@ Item {
 
             Image {
                 id: imgAvata
-                source: "qrc:/image/woman-icon.png"
+                source: model.src
                 width: parent.width
                 height: parent.height
             }
@@ -43,7 +43,7 @@ Item {
 
         Text {
             id: txtEmpName
-            text: qsTr("LTD")
+            text: model.text
             font.pointSize: parent.height / 20
             color: "white"
 
