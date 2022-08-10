@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ListEmployee.qml</file>
+        <file>EmployeeDetail.qml</file>
+        <file>image/call-icon.png</file>
+        <file>image/chat-icon.png</file>
+        <file>Calling.qml</file>
+        <file>image/emp-icon.png</file>
+        <file>image/man-glasses-icon.png</file>
+        <file>image/man-icon.png</file>
+        <file>image/woman-icon.png</file>
+        <file>Chat.qml</file>
+    </qresource>
+</RCC>
