@@ -42,7 +42,7 @@ Item {
 
         Text {
             id: txtEmpDes
-            text: qsTr("IS")
+            text: model.des
             font.pointSize: parent.height / 40
 
             anchors{

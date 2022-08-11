@@ -11,5 +11,7 @@
         <file>image/man-icon.png</file>
         <file>image/woman-icon.png</file>
         <file>Chat.qml</file>
+        <file>Application.xml</file>
+        <file>data.json</file>
     </qresource>
 </RCC>
