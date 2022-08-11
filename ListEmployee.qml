@@ -3,6 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
 Item {
+/*
     ListModel{
         id: nameModel
         ListElement { text: "Name 1" ; phone: "08690000001"; src: "qrc:/image/woman-icon.png"; des: "Infomation System"}
@@ -26,7 +27,7 @@ Item {
         ListElement { text: "Name 19" ; phone: "08690000019"; src: "qrc:/image/man-glasses-icon.png"; des: "Infomation System"}
         ListElement { text: "Name 20" ; phone: "08690000020"; src: "qrc:/image/man-icon.png"; des: "Infomation System"}
     }
-
+*/
     Component{
         id: empDelegate
         Rectangle{
@@ -51,7 +52,7 @@ Item {
                 }
                 Image {
                     id: img
-                    source: model.src
+                    source: src
                     anchors.fill: parent
                     clip: true
                 }
@@ -62,6 +63,16 @@ Item {
                 text: model.text
                 anchors {
                     left: recImg.right
+                    leftMargin: 30
+                    verticalCenter: parent.verticalCenter
+                }
+            }
+            Text {
+                id: txtDes
+                text: model.des
+                anchors {
+                    left: recImg.right
+                    top: txt.bottom
                     leftMargin: 30
                     verticalCenter: parent.verticalCenter
                 }
@@ -109,7 +120,31 @@ Item {
         anchors.fill: parent
         clip: true
 
-        model: nameModel
+        model: ListModel {id: nameModel}
         delegate: empDelegate
     }
+    Component.onCompleted: {
+            getUserData();
+        }
+
+        function getUserData(){
+            var xmlhttp = new XMLHttpRequest();
+            var url = "qrc:/data.json";
+
+            xmlhttp.onreadystatechange = function(){
+                console.log("status", xmlhttp.status);
+                console.log("state", xmlhttp.readyState);
+                if(xmlhttp.readyState === xmlhttp.DONE && xmlhttp.status === 200){
+                    appendIntoModel(xmlhttp.responseText);
+                }
+            }
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
+        function appendIntoModel(response){
+            var arr = JSON.parse(response);
+            for(var i = 0; i < arr.length; i++){
+                nameModel.append({src: arr[i].image, text: arr[i].name, phone: arr[i].phone, des: arr[i].designation});
+            }
+        }
 }
