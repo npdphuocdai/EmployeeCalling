@@ -2,21 +2,41 @@
 #define ADAPTER_H
 
 #include <QString>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QList>
+#include <QFile>
+#include <QDebug>
+#include <QDir>
+
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlDriver>
+#include <QSqlError>
+
+#include <employee.h>
 
 class Adapter
 {
 public:
     Adapter();
 
-    const QString &getDataSource() const;
+
+    QByteArray initDataSource();
+    void convertFromJson(const QByteArray &file);
+    void convertFromSQLite();
+    void convertFromFile(const QByteArray &file);
+
+    const QList<Employee> &employees() const;
+
+    const QString &dataSource() const;
     void setDataSource(const QString &newDataSource);
 
-    int dataSourceType();
-    int type() const;
-    void setType(int newType);
 private:
     QString m_dataSource;
-    int m_type;
+    QList<Employee> m_employee;
 };
 
 #endif // ADAPTER_H

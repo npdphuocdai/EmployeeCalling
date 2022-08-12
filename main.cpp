@@ -3,6 +3,10 @@
 
 #include <QQmlContext>
 #include <QFile>
+#include <QDomDocument>
+#include <QDomElement>
+#include <employeemodel.h>
+#include <adapter.h>
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -15,13 +19,47 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    QFile file(":/data.json");
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    QByteArray byteArr = file.readAll();
-    file.close();
+//    QFile file(":/data.json");
+//    file.open(QIODevice::ReadOnly | QIODevice::Text);
+//    QByteArray byteArr = file.readAll();
+//    file.close();
+    //read xml file
+    QDomDocument appXML;
+    QFile xmlFile(":/Application.xml");
+    if (!xmlFile.open(QIODevice::ReadOnly ))
+    {
+        // Error while loading file
+    }
+    appXML.setContent(&xmlFile);
+    xmlFile.close();
 
-    QQmlContext *root = engine.rootContext();
-    root->setContextProperty("_JsonModel",byteArr);
+    QDomElement root = appXML.documentElement();
+    QDomElement node = root.firstChild().toElement();
+
+    QString data = "";
+
+    while(node.isNull() == false)
+    {
+        if(node.tagName() == "DataSource"){
+            while(!node.isNull()){
+                QString name = node.attribute("name","name");
+
+                data.append(name);
+                node = node.nextSibling().toElement();
+            }
+        }
+        node = node.nextSibling().toElement();
+    }
+
+    Adapter adapter;
+    adapter.setDataSource(data);
+
+    EmployeeModel empModel;
+    empModel.setAdapter(adapter);
+
+    QQmlContext *rootCtx = engine.rootContext();
+//    rootCtx->setContextProperty("_JsonModel",byteArr);
+    rootCtx->setContextProperty("_model",&empModel);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

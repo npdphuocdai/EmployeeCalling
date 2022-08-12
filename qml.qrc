@@ -13,5 +13,7 @@
         <file>Chat.qml</file>
         <file>Application.xml</file>
         <file>data.json</file>
+        <file>db/employee.sqlite</file>
+        <file>data.txt</file>
     </qresource>
 </RCC>

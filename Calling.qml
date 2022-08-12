@@ -36,7 +36,7 @@ Item {
 
             Image {
                 id: imgAvata
-                source: model.src
+                source: src
                 width: parent.width
                 height: parent.height
             }
@@ -44,8 +44,8 @@ Item {
 
         Text {
             id: txtEmpName
-            text: model.text
-            font.pointSize: parent.height / 20
+            text: name
+            font.pointSize: parent.height / 40
             color: "white"
 
             anchors{

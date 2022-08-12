@@ -21,14 +21,35 @@ Item {
                 left: parent.left
                 right: parent.right
             }
+            Rectangle{
+                id: recAvatar
+                width: parent.height / 1.5
+                height: parent.height / 1.5
+                radius: height/2
+
+                anchors{
+                    left: parent.left
+                    leftMargin: parent.width / 30
+                    verticalCenter: parent.verticalCenter
+                }
+
+                Image {
+                    id: imgAvatar
+                    source: src
+                    width: parent.width
+                    height: parent.height
+                }
+            }
 
             Text {
                 id: txtEmpName
-                text: model.text
+                text: name
                 font.pointSize: parent.height / 5
 
                 anchors{
-                    centerIn: parent
+                    left: recAvatar.right
+                    leftMargin: parent.width / 30
+                    verticalCenter: parent.verticalCenter
                 }
             }
         }

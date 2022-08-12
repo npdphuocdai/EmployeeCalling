@@ -32,14 +32,14 @@ Item {
             }
             Image {
                 id: imgDetail
-                source: model.src
+                source: src
                 anchors.fill: parent
             }
         }
 
         Text {
             id: txtEmpName
-            text: model.text
+            text: name
             font.pointSize: parent.height / 40
 
             anchors{
@@ -51,7 +51,7 @@ Item {
 
         Text {
             id: txtEmpDes
-            text: model.des
+            text: des
             font.pointSize: parent.height / 40
 
             anchors{
@@ -63,7 +63,7 @@ Item {
 
         Text {
             id: txtEmpPhone
-            text: model.phone
+            text: phone
             font.pointSize: parent.height / 40
 
             anchors{

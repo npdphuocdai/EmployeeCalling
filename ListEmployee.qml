@@ -36,21 +36,24 @@ Item {
 
             Text {
                 id: txt
-                text: model.text
+                text: name
+                font.pointSize: parent.height/5
                 anchors {
+                    top: parent.top
+                    topMargin: parent.height/10
                     left: recImg.right
-                    leftMargin: 30
-                    verticalCenter: parent.verticalCenter
+                    leftMargin: parent.width/10
                 }
             }
             Text {
                 id: txtDes
-                text: model.des
+                text: des
+                font.pointSize: parent.height/5
+
                 anchors {
                     left: recImg.right
                     top: txt.bottom
-                    leftMargin: 30
-                    verticalCenter: parent.verticalCenter
+                    leftMargin: parent.width/10
                 }
             }
 
@@ -95,13 +98,7 @@ Item {
         anchors.fill: parent
         clip: true
 
-        model: ListModel {id: nameModel}
+        model: _model
         delegate: empDelegate
-    }
-    Component.onCompleted: {
-        var json = JSON.parse(_JsonModel);
-        for(var i = 0; i < json.length; i++){
-            nameModel.append({src: json[i].image, text: json[i].name, phone: json[i].phone, des: json[i].designation});
-        }
     }
 }
