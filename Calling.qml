@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import Qt.labs.settings 1.1
 
 Item {
     Rectangle{
@@ -52,6 +53,21 @@ Item {
                 topMargin: parent.height/20
                 horizontalCenter: parent.horizontalCenter
             }
+        }
+        ComboBox{
+            id: colorCB
+            model: colorModel
+            editable: false
+            onActivated: {
+                recCalling.color = currentText
+            }
+            anchors {
+                top: parent.bottom
+                right: parent.right
+            }
+        }
+        Settings{
+            property alias colorCall: recCalling.color
         }
     }
 

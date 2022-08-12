@@ -6,6 +6,8 @@ QT += quick
 
 SOURCES += \
         adapter.cpp \
+        employee.cpp \
+        employeemodel.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -24,4 +26,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES +=
 
 HEADERS += \
-    adapter.h
+    adapter.h \
+    employee.h \
+    employeemodel.h

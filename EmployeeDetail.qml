@@ -1,8 +1,17 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import Qt.labs.settings 1.1
 
 Item {
+    ListModel{
+        id: colorModel
+        ListElement {text: "yellow"}
+        ListElement {text: "lightblue"}
+        ListElement {text: "lightgreen"}
+        ListElement {text: "lightpink"}
+    }
+
     Rectangle{
         id: recDetail
         anchors.fill: parent
@@ -105,7 +114,7 @@ Item {
                 Button {
                     id: btnCall
                     anchors{
-                        horizontalCenter: parent.horizontalCenter
+                        left: parent.left
                         bottom: parent.bottom
 
                     }
@@ -158,9 +167,8 @@ Item {
                 Button {
                     id: btnChat
                     anchors{
-                        horizontalCenter: parent.horizontalCenter
                         bottom: parent.bottom
-
+                        left: parent.left
                     }
                     text: "Back"
                     MouseArea {
@@ -169,6 +177,21 @@ Item {
                     }
                 }
             }
+        }
+        ComboBox{
+            id: colorCB
+            model: colorModel
+            editable: false
+            onActivated: {
+                recDetail.color = currentText
+            }
+            anchors {
+                top: parent.bottom
+                right: parent.right
+            }
+        }
+        Settings{
+            property alias colorDetail: recDetail.color
         }
     }
 }
